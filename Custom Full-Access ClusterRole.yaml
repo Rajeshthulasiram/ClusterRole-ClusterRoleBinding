@@ -1,0 +1,59 @@
+# full-access-clusterrole.yaml
+# 🔧 ClusterRole
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: full-access-role
+rules:
+- apiGroups: ["", "apps", "batch", "rbac.authorization.k8s.io"]
+  resources: ["*"]
+  verbs: ["*"]
+
+
+# 🔗 ClusterRoleBinding
+
+# full-access-binding-john.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: full-access-binding-john
+subjects:
+- kind: User
+  name: john
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: full-access-role
+  apiGroup: rbac.authorization.k8s.io
+
+# Then apply them:
+kubectl apply -f full-access-clusterrole.yaml
+kubectl apply -f full-access-binding-john.yaml
+
+
+#🔤 CRUD Full Form
+Letter	Meaning   	Kubernetes verb
+C	      Create	    create
+R	      Read	      get, list, watch
+U	      Update	    update, patch
+D	      Delete	    delete, deletecollection
+
+
+# If you want to give a user full CRUD access to Pods in a namespace:
+verbs:
+  - create
+  - get
+  - list
+  - watch
+  - update
+  - patch
+  - delete
+  - deletecollection
+
+
+
+
+
+
+
