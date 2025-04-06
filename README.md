@@ -15,6 +15,7 @@ kubectl config use-context john-context
 kubectl get nodes
 kubectl get namespaces
 kubectl get pv
+
 He should be able to read but not modify these resources.
 
 
